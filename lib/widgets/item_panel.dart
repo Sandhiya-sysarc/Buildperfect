@@ -1,11 +1,9 @@
 /*
 @author     :   karthick.d    30/09/2025
 @desc       :   itempanel wraps left panel widgets options (draggable)
-                and center panel dragged controls list
-                
+                and center panel dragged controls list          
 */
 import 'dart:math';
-
 import 'package:dashboard/types/drag_drop_types.dart';
 import 'package:dashboard/widgets/my_draggable_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -31,16 +29,13 @@ class ItemPanel extends StatefulWidget {
     required this.dropPreview,
     required this.hoveringData,
   });
-
   @override
   State<ItemPanel> createState() => _ItemsPanelState();
 }
-
 class _ItemsPanelState extends State<ItemPanel> {
   /// function return the corresponding formcontrol widgets
   /// which serves as visual placeholders which are dragged from
   /// left widgets panels
-
   Widget getWidgetPlaceholders(PlaceholderWidgets controlName) {
     return switch (controlName) {
       PlaceholderWidgets.Textfield => TextField(

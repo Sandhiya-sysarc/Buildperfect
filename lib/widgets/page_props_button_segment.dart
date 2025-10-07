@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class PagePropsButtonSegment extends StatefulWidget {
   final void Function(Set<PagePropsSegmentButton>) onSegmentChanged;
   const PagePropsButtonSegment({super.key, required this.onSegmentChanged});
-
   @override
   State<PagePropsButtonSegment> createState() => _PagePropsButtonSegmentState();
 }
@@ -13,6 +12,7 @@ class _PagePropsButtonSegmentState extends State<PagePropsButtonSegment> {
   Set<PagePropsSegmentButton> selectedSegmentButton = {
     PagePropsSegmentButton.property,
   };
+
   @override
   Widget build(BuildContext context) {
     TextStyle txtStyle = TextStyle(fontSize: 10);
@@ -35,7 +35,6 @@ class _PagePropsButtonSegmentState extends State<PagePropsButtonSegment> {
         ),
       ],
       selected: selectedSegmentButton,
-
       showSelectedIcon: false,
       style: SegmentedButton.styleFrom(
         textStyle: txtStyle,
