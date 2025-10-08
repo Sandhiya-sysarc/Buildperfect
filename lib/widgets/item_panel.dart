@@ -5,6 +5,7 @@
 */
 import 'dart:math';
 import 'package:dashboard/types/drag_drop_types.dart';
+import 'package:dashboard/widgets/containers/dragged_holder.dart';
 import 'package:dashboard/widgets/my_draggable_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -36,47 +37,119 @@ class _ItemsPanelState extends State<ItemPanel> {
   /// function return the corresponding formcontrol widgets
   /// which serves as visual placeholders which are dragged from
   /// left widgets panels
-  Widget getWidgetPlaceholders(PlaceholderWidgets controlName) {
+
+  int selectedIndex = 0;
+
+  Widget getWidgetPlaceholders(
+    PlaceholderWidgets controlName, {
+    int index = 0,
+  }) {
     return switch (controlName) {
-      PlaceholderWidgets.Textfield => TextField(
-        enabled: false,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: 'Textbox',
+      PlaceholderWidgets.Textfield => DraggedHolder(
+        onTapDraggedControl: () {
+          selectedIndex = index;
+
+          print(selectedIndex);
+          setState(() {});
+        },
+        labelText: 'label $index',
+        child: TextField(
+          enabled: false, // enabled: selectedIndex == index ? true : false,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'Textbox',
+            label: Text('TextField'),
+            floatingLabelStyle: TextStyle(fontSize: 14),
+
+            disabledBorder:
+                selectedIndex == index
+                    ? OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.green,
+                        width: 5.0,
+                        style: BorderStyle.solid,
+                      ),
+                    )
+                    : OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+          ),
         ),
       ),
-      PlaceholderWidgets.Dropdown => DropdownMenu(
-        dropdownMenuEntries: [],
-        enabled: false,
-        hintText: 'DropDownField',
-        width: 300,
-      ),
-      PlaceholderWidgets.Checkbox => Row(
-        children: [
-          Checkbox(
-            value: true,
-            onChanged: (value) {},
-            semanticLabel: 'Checkbox',
+      PlaceholderWidgets.Dropdown => DraggedHolder(
+        onTapDraggedControl: () {
+          selectedIndex = index;
+
+          print(selectedIndex);
+          setState(() {});
+        },
+        labelText: 'label $index',
+        child: DropdownMenu(
+          dropdownMenuEntries: [],
+          enabled: false,
+          hintText: 'DropDownField',
+          width: 300,
+          inputDecorationTheme: InputDecorationTheme(
+            disabledBorder:
+                selectedIndex == index
+                    ? OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.green,
+                        width: 5.0,
+                        style: BorderStyle.solid,
+                      ),
+                    )
+                    : OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
           ),
-          Text('Checkbox'),
-        ],
+        ),
       ),
-      PlaceholderWidgets.Radio => Row(
-        children: [
-          Radio(
-            toggleable: false,
-            value: '',
-            groupValue: '',
-            onChanged: (value) {},
+      PlaceholderWidgets.Checkbox => DraggedHolder(
+        onTapDraggedControl: () {
+          selectedIndex = index;
+
+          print(selectedIndex);
+          setState(() {});
+        },
+
+        labelText: 'label $index',
+        child: DottedBorder(
+          options: RectDottedBorderOptions(
+            dashPattern: [10, 10],
+            color: selectedIndex == index ? Colors.green : Colors.transparent,
           ),
-          Text('Radio'),
-        ],
+          child: Row(
+            children: [
+              Checkbox(
+                value: true,
+                onChanged: (value) {},
+                semanticLabel: 'Checkbox',
+              ),
+              Text('Checkbox'),
+            ],
+          ),
+        ),
+      ),
+      PlaceholderWidgets.Radio => DraggedHolder(
+        labelText: 'label $index',
+        child: Row(
+          children: [
+            Radio(
+              toggleable: false,
+              value: '',
+              groupValue: '',
+              onChanged: (value) {},
+            ),
+            Text('Radio'),
+          ],
+        ),
       ),
       PlaceholderWidgets.Button => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [ElevatedButton(onPressed: () {}, child: Text('Save'))],
       ),
-      PlaceholderWidgets.Label => Text('Label Field'),
+      PlaceholderWidgets.Label => Text('label $index'),
     };
   }
 
@@ -118,7 +191,9 @@ class _ItemsPanelState extends State<ItemPanel> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Center(child: getWidgetPlaceholders(e.value)),
+                  child: Center(
+                    child: getWidgetPlaceholders(e.value, index: e.key + 1),
+                  ),
                 ),
               );
               // }

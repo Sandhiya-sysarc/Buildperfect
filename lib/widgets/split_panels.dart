@@ -1,5 +1,8 @@
+/*
+    @auth     : karthick.d    06/10/2025
+    @desc     : parent container for all the three panel
+*/
 import 'dart:math';
-
 import 'package:dashboard/bloc/bpwidgetprops/bpwidget_props_bloc.dart';
 import 'package:dashboard/types/drag_drop_types.dart';
 import 'package:dashboard/widgets/item_panel.dart';
@@ -12,11 +15,9 @@ class SplitPanel extends StatefulWidget {
   final int columns;
   final double itemSpacing;
   const SplitPanel({super.key, this.columns = 3, this.itemSpacing = 2.0});
-
   @override
   State<SplitPanel> createState() => _SplitPanelState();
 }
-
 class _SplitPanelState extends State<SplitPanel> {
   final List<PlaceholderWidgets> upper = [];
   final List<PlaceholderWidgets> lower = [
@@ -30,7 +31,6 @@ class _SplitPanelState extends State<SplitPanel> {
 
   PanelLocation dragStart = (-1, Panel.lower);
   PanelLocation? dropPreview;
-
   PlaceholderWidgets? hoveringData;
 
   /// this method is called when the itemplaceholder is dragged

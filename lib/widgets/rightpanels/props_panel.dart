@@ -1,4 +1,6 @@
 import 'package:dashboard/bloc/bpwidgetprops/bpwidget_props_bloc.dart';
+import 'package:dashboard/widgets/customcontrols/key_value_dropdown.dart';
+import 'package:dashboard/widgets/customcontrols/key_value_textbox.dart';
 import 'package:dashboard/widgets/rightpanels/panel_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,237 +34,87 @@ class _PropsPanelState extends State<PropsPanel> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: SizedBox(
-                          width: 80,
-                          child: Text(
-                            'Label Text',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.width * 0.5,
-                        height: 25,
-
-                        child: TextField(
-                          style: TextStyle(fontSize: 12),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: KeyValueTextbox(
+                    labeltext: 'Label Text',
+                    width: widget.width,
                   ),
-
-                  // Row(
-                  //   children: [
-                  //     Text('Label'),
-                  //   ],
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: SizedBox(
-                          width: 80,
-                          child: Text(
-                            'Control Name',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.width * 0.5,
-                        height: 25,
-
-                        child: TextField(
-                          style: TextStyle(fontSize: 12),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: KeyValueTextbox(
+                    labeltext: 'Control Name',
+                    width: widget.width,
                   ),
-
-                  // Row(
-                  //   children: [
-                  //     Text('Label'),
-                  //   ],
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: SizedBox(
-                          width: 80,
-                          child: Text(
-                            'Control type',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.width * 0.5,
-                        height: 25,
-
-                        child: TextField(
-                          style: TextStyle(fontSize: 12),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: KeyValueTextbox(
+                    width: widget.width,
+                    labeltext: 'Control Type',
                   ),
-
-                  // Row(
-                  //   children: [
-                  //     Text('Label'),
-                  //   ],
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: SizedBox(
-                          width: 80,
-                          child: Text(
-                            'Required ?',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.width * 0.5,
-                        height: 25,
-
-                        child: TextField(
-                          style: TextStyle(fontSize: 12),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
+                  child: KeyValueDropdown(
+                    width: widget.width,
+                    labeltext: 'Required ?',
+                    dropdownEntries: <DropdownMenuEntry>[
+                      DropdownMenuEntry(value: 'true', label: 'true'),
+                      DropdownMenuEntry(value: 'false', label: 'false'),
                     ],
+                    onSelected: (value) {
+                      print('required ? => $value');
+                    },
                   ),
-
-                  // Row(
-                  //   children: [
-                  //     Text('Label'),
-                  //   ],
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: SizedBox(
-                          width: 80,
-                          child: Text(
-                            'Verification Required ?',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.width * 0.5,
-                        height: 25,
-
-                        child: TextField(
-                          style: TextStyle(fontSize: 12),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
+                  child: KeyValueDropdown(
+                    width: widget.width,
+                    labeltext: 'Verification Required ?',
+                    dropdownEntries: <DropdownMenuEntry>[
+                      DropdownMenuEntry(value: 'true', label: 'true'),
+                      DropdownMenuEntry(value: 'false', label: 'false'),
                     ],
                   ),
-
-                  // Row(
-                  //   children: [
-                  //     Text('Label'),
-                  //   ],
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: SizedBox(
-                          width: 80,
-                          child: Text(
-                            'Validations',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.width * 0.5,
-                        height: 25,
-
-                        child: TextField(
-                          style: TextStyle(fontSize: 12),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: KeyValueTextbox(
+                    width: widget.width,
+                    labeltext: 'Minlength',
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: KeyValueTextbox(
+                    width: widget.width,
+                    labeltext: 'Maxlength',
+                  ),
+                ),
 
-                  // Row(
-                  //   children: [
-                  //     Text('Label'),
-                  //   ],
-                  // ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: KeyValueDropdown(
+                    dropdownEntries: <DropdownMenuEntry>[
+                      DropdownMenuEntry(value: 'email', label: 'Email'),
+                      DropdownMenuEntry(value: 'phone', label: 'Phone'),
+                      DropdownMenuEntry(value: 'pan', label: 'PAN'),
+                      DropdownMenuEntry(value: 'aadhaar', label: 'Aadhaar'),
+
+                      DropdownMenuEntry(value: 'dl', label: 'DL'),
+                      DropdownMenuEntry(value: 'voterid', label: 'Voter ID'),
+                      DropdownMenuEntry(value: 'passport', label: 'Passport'),
+
+                      DropdownMenuEntry(value: 'gst', label: 'GST'),
+                      DropdownMenuEntry(value: 'upi', label: 'UPI ID'),
+                    ],
+                    width: widget.width,
+                    labeltext: 'Validations',
+                    onSelected: (value) {
+                      print(value);
+                    },
+                  ),
                 ),
               ],
             ),
