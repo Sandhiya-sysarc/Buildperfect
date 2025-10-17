@@ -1,13 +1,6 @@
-/*
-    @auth     : karthick.d    06/10/2025
-    @desc     : parent container for all the three panel
-                split_panel
-                  items_panel
-
-*/
 import 'dart:math';
+
 import 'package:dashboard/bloc/bpwidgetprops/bpwidget_props_bloc.dart';
-import 'package:dashboard/bloc/bpwidgetprops/model/bpwidget_props.dart';
 import 'package:dashboard/types/drag_drop_types.dart';
 import 'package:dashboard/widgets/item_panel.dart';
 import 'package:dashboard/widgets/my_drop_region.dart';
@@ -19,9 +12,11 @@ class SplitPanel extends StatefulWidget {
   final int columns;
   final double itemSpacing;
   const SplitPanel({super.key, this.columns = 3, this.itemSpacing = 2.0});
+
   @override
   State<SplitPanel> createState() => _SplitPanelState();
 }
+
 class _SplitPanelState extends State<SplitPanel> {
   final List<PlaceholderWidgets> upper = [];
   final List<PlaceholderWidgets> lower = [
@@ -35,12 +30,8 @@ class _SplitPanelState extends State<SplitPanel> {
 
   PanelLocation dragStart = (-1, Panel.lower);
   PanelLocation? dropPreview;
+
   PlaceholderWidgets? hoveringData;
-  BpwidgetProps selectedWidget = BpwidgetProps(
-    label: '',
-    controlName: '',
-    controlType: '',
-  );
 
   /// this method is called when the itemplaceholder is dragged
   /// it's set  the state -> dragStart and data state properties
@@ -67,11 +58,6 @@ class _SplitPanelState extends State<SplitPanel> {
         upper.insert(max(dropPreview!.$1, upper.length), hoveringData!);
       }
     });
-  }
-
-  void onItemClickRef(BpwidgetProps widget) {
-    selectedWidget = widget;
-    setState(() {});
   }
 
   @override
@@ -145,7 +131,6 @@ class _SplitPanelState extends State<SplitPanel> {
                         dragStart: dragStart,
                         dropPreview: dropPreview,
                         hoveringData: hoveringData,
-                        onItemClicked: onItemClickRef,
                       ),
                     ),
                   ),
@@ -156,13 +141,9 @@ class _SplitPanelState extends State<SplitPanel> {
                   right: 0,
                   child: DecoratedBox(
                     decoration: BoxDecoration(color: Colors.pink.shade100),
-
-                    /// RightPanel - is parent model for props , action and
-                    /// datasource panel
                     child: RightPanel(
                       width: rightPanelWidth,
-                      height: constraints.maxHeight,
-                      props: selectedWidget,
+                      height: constraints.maxHeight, props: null,
                     ),
                   ),
                 ),

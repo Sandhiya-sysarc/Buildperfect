@@ -50,8 +50,17 @@ class _KeyValueTextboxState extends State<KeyValueReactiveTextbox> {
             formControlName: widget.formControlName,
             style: TextStyle(fontSize: 12),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 8),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 16,
+              ),
               border: OutlineInputBorder(),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+              ),
             ),
           ),
         ),

@@ -15,7 +15,6 @@ class KeyValueTextbox extends StatefulWidget {
     required this.width,
     required this.labeltext,
   });
-
   @override
   State<KeyValueTextbox> createState() => _KeyValueTextboxState();
 }
@@ -42,12 +41,14 @@ class _KeyValueTextboxState extends State<KeyValueTextbox> {
         SizedBox(
           width: widget.width * 0.5,
           height: 25,
-
           child: TextField(
             style: TextStyle(fontSize: 12),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(left: 8),
               border: OutlineInputBorder(),
+              isDense: true,
+              errorText: null,
+              errorStyle: TextStyle(fontSize: 10, height: 1),
             ),
           ),
         ),
